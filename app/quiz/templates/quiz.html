@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div>
+    <h1>
+        Take the following quiz:  {{quiz.name}}
+    </h1>
+</div>
+
+<div>
+    <h2>
+       Please Read the following and answer the questions below:
+    </h2>
+</div>
+
+<div>
+    {{quiz.content}}
+</div>
+
+<hr>
+
+<div>
+    <h2>
+        Questions:
+    </h2>
+</div>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <div>
+            <ol>
+                {% for question in quiz.questions.all %}
+                Q:
+                {{question.question}}<br>
+                A: <br>
+                <input type="radio" name="qid_{{question.id}}" value="True">True<br>
+                <input type="radio" name="qid_{{question.id}}" value="False">False<br>
+                <hr>
+                {% endfor %}
+            </ol>
+    </div>
+
+    <div>
+        <label for="name">Please enter your name: </label><input id="name" name="name" type="text">
+    </div>
+    <input type="submit" name="Submit">
+</form>
+{% endblock content %}
